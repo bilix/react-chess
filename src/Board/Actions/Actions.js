@@ -8,4 +8,4 @@ const Actions = () => (
     </ActionsContainer>
 );
 
-export default Actions;
+export default React.memo(Actions);

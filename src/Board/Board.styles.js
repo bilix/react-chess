@@ -25,19 +25,20 @@ export const StyledSquare = styled.div`
         if (props.selected) {
             return `
                 background-color: rgb(4, 41, 247, 0.7);
-                border: 3px solid rgb(4, 41, 247);
+                border: 4px solid rgb(4, 41, 247);
             `;
         } else if (props.killable) {
             return `
                 background-color: rgb(244, 57, 0, 0.7);
-                border: 3px solid rgb(244, 57, 0);
+                border: 4px solid rgb(244, 57, 0);
                 cursor: pointer;
             `;
         } else if (props.available) {
             return `
                 background-color: rgb(27, 145, 11, 0.7);
-                border: 3px solid rgb(27, 145, 11);
+                border: 4px solid rgb(27, 145, 11);
                 cursor: pointer;
+                ${getAdjacentBorders(props.adjacent)}
             `;
         } else if (props.white) {
             return  `
@@ -51,6 +52,17 @@ export const StyledSquare = styled.div`
 
     }}
 `;
+
+const getAdjacentBorders = (adjacent) => {
+    let ret = ``;
+    if (!adjacent || adjacent.length === 0) return;
+    for (let border of adjacent) {
+        ret += `
+            border-${border}-width: 2px;
+        `;
+    }
+    return ret;
+}
 
 export const Border = styled.div`
     background-color: #491E10;

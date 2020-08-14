@@ -15,4 +15,4 @@ const ResetBoard = () => {
     )
 }
 
-export default ResetBoard;
+export default React.memo(ResetBoard);
