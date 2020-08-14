@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { currentPlayerSelector } from '../Store/Reducers/Players/PlayersReducer';
+import { currentPlayerSelector } from '../../Store/Reducers/Players/PlayersReducer';
 import { StyledHeader } from './Header.styles';
 
 const Header = () => {

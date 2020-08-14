@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPiece } from '../BoardGenerator';
+import { getPiece } from '../../BoardGenerator';
 import { StyledPieceIcon } from './PlayerInfo.styles';
 
 const PieceIcon = ({player, piece}) => {

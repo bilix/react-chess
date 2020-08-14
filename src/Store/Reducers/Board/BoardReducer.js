@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { initialBoard } from '../../../Board/BoardGenerator';
+import { initialBoard } from '../../../BoardGenerator';
 
 const initialState = {
     board: initialBoard,

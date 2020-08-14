@@ -1,19 +1,19 @@
 import React from 'react';
 import { GameBoard, Border } from './Board.styles';
 import Square from './Square';
-import { generateBoard, verticalBorder, horizontalBorder } from './BoardGenerator';
+import { generateBoard, verticalBorder, horizontalBorder, isLeftColumn, isRightColumn } from '../../BoardGenerator';
 import PieceComponent from './PieceComponent';
 import {useSelector} from 'react-redux';
-import { boardSelector } from '../Store/Reducers/Board/BoardReducer';
+import { boardSelector } from '../../Store/Reducers/Board/BoardReducer';
 
 const renderSquare = (square) => {
     const row = Math.ceil(square.id/8);
-    const showStart = square.id % 8 === 1;
-    const showEnd = square.id % 8 === 0;
+    const showStart = isLeftColumn(square.id);
+    const showEnd = isRightColumn(square.id);
     return (
         <>
             {showStart && <Border key={`border_left_${verticalBorder[row-1]}`} left>{verticalBorder[row-1]}</Border>}
-            <Square id={square.id}>
+            <Square squareNumber={square.id}>
                 {square.piece && 
                     <PieceComponent position={square.id} piece={square.piece} />
                 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import {AppContainer} from './App.styles';
 import './App.css';
-import Board from './Board/Board';
+import Board from './Components/Board/Board';
 import { Provider } from "react-redux";
 import store from './Store/store';
-import Header from './Header/Header';
-import PlayerInfo from './Board/PlayerInfo/PlayerInfo';
-import Actions from './Board/Actions/Actions';
+import Header from './Components/Header/Header';
+import PlayerInfo from './Components/PlayerInfo/PlayerInfo';
+import Actions from './Components/Actions/Actions';
 
 function App() {
   return (

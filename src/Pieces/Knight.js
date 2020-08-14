@@ -1,4 +1,5 @@
 import Piece from './Piece';
+import { isRightColumn, isLeftColumn } from '../BoardGenerator';
 
 class Knight extends Piece {
     constructor(props) {
@@ -18,14 +19,25 @@ class Knight extends Piece {
         const leftDown = position + 6;
         const rightDown = position + 10;
 
-        if (upLeft > 0 && upLeft % 8 !== 0) this.addIfNotFriendly(upLeft, friendlyPieces, moves);
-        if (upRight > 0 && upRight % 8 !== 1) this.addIfNotFriendly(upRight, friendlyPieces, moves);
-        if (leftUp > 0 && leftUp % 8 !== 0 && leftUp % 8 !== 7) this.addIfNotFriendly(leftUp, friendlyPieces, moves);
-        if (rightUp > 0 && rightUp % 8 !== 1 && rightUp % 8 !== 2) this.addIfNotFriendly(rightUp, friendlyPieces, moves);
-        if (downLeft < 64 && downLeft % 8 !== 0) this.addIfNotFriendly(downLeft, friendlyPieces, moves);
-        if (downRight < 64 && downRight % 8 !== 1) this.addIfNotFriendly(downRight, friendlyPieces, moves);
-        if (leftDown < 64 && leftDown % 8 !== 0 && leftDown % 8 !== 7) this.addIfNotFriendly(leftDown, friendlyPieces, moves);
-        if (rightDown < 64 && rightDown % 8 !== 1 && rightDown % 8 !== 2) this.addIfNotFriendly(rightDown, friendlyPieces, moves);
+        const isToTheLeft = (position) => isLeftColumn(position) || position % 8 === 2;
+        const isToTheRight = (position) => isRightColumn(position) || position % 8 === 7; 
+
+        if (upLeft > 0 && !isRightColumn(upLeft)) 
+            this.addIfNotFriendly(upLeft, friendlyPieces, moves);
+        if (upRight > 0 && !isLeftColumn(upRight)) 
+            this.addIfNotFriendly(upRight, friendlyPieces, moves);
+        if (leftUp > 0 && !isToTheRight(leftUp)) 
+            this.addIfNotFriendly(leftUp, friendlyPieces, moves);
+        if (rightUp > 0 && !isToTheLeft(rightUp)) 
+            this.addIfNotFriendly(rightUp, friendlyPieces, moves);
+        if (downLeft < 64 && !isRightColumn(downLeft)) 
+            this.addIfNotFriendly(downLeft, friendlyPieces, moves);
+        if (downRight < 64 && !isLeftColumn(downRight)) 
+            this.addIfNotFriendly(downRight, friendlyPieces, moves);
+        if (leftDown < 64 && !isToTheRight(leftDown)) 
+            this.addIfNotFriendly(leftDown, friendlyPieces, moves);
+        if (rightDown < 64 && !isToTheLeft(rightDown)) 
+            this.addIfNotFriendly(rightDown, friendlyPieces, moves);
 
         return moves;
     }

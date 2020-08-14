@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyledPiece } from './Board.styles';
-import { selectSquare, setMoves } from '../Store/Reducers/Board/BoardReducer';
+import { selectSquare, setMoves } from '../../Store/Reducers/Board/BoardReducer';
 import { useSelector, useDispatch } from 'react-redux';
-import { currentPlayerSelector } from '../Store/Reducers/Players/PlayersReducer';
-import { player1PiecesSelector, player2PiecesSelector } from '../Store/Reducers/Board/BoardReducer';
+import { currentPlayerSelector } from '../../Store/Reducers/Players/PlayersReducer';
+import { player1PiecesSelector, player2PiecesSelector } from '../../Store/Reducers/Board/BoardReducer';
+import { getPlayerFromColor } from '../../BoardGenerator';
 
 const PieceComponent = ({piece, position}) =>{
     const currentPlayer = useSelector(state => currentPlayerSelector(state));
@@ -11,12 +12,12 @@ const PieceComponent = ({piece, position}) =>{
     const player2Pieces = useSelector(state => player2PiecesSelector(state));
     const dispatch = useDispatch();
     
-    const player = piece.color === 'w' ? 1 : 2;
+    const player = getPlayerFromColor(piece.color);
 
     const friendlyPieces = player === 1 ? player1Pieces : player2Pieces;
     const enemyPieces = player === 1 ? player2Pieces : player1Pieces;
 
-    const isCurrentPlayer = (piece.color === 'w' && currentPlayer === 1) || (piece.color === 'b' && currentPlayer === 2);
+    const isCurrentPlayer = player === currentPlayer;
 
 
     const handleClick = () => {
