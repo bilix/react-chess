@@ -1,9 +1,23 @@
+import Pawn from '../Pieces/Pawn';
+import Knight from '../Pieces/Knight';
+import Rook from '../Pieces/Rook';
+import Queen from '../Pieces/Queen';
+import King from '../Pieces/King';
+import Bishop from '../Pieces/Bishop';
 
-import { Pawn, Rook, Knight, Queen, King, Bishop } from './Pieces/Piece';
+export const initialBoard = [
+    'br','bh','bb','bq','bk','bb','bh','br',
+    'bp','bp','bp','bp','bp','bp','bp','bp',
+    '','','','','','','','',
+    '','','','','','','','',
+    '','','','','','','','',
+    '','','','','','','','',
+    'wp','wp','wp','wp','wp','wp','wp','wp',
+    'wr','wh','wb','wq','wk','wb','wh','wr'
+];
 
-export const initialBoard = ['r','h','b','q','k','b','h','r','8p','8','8','8','8','8p','r','h','b','q','k','b','h','r'];
-
-const isNumber = (input) => !isNaN(input);
+export const verticalBorder = [8,7,6,5,4,3,2,1];
+export const horizontalBorder = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ''];
 
 const getPiece = (piece, color) => {
     switch (piece) {
@@ -24,34 +38,21 @@ const getPiece = (piece, color) => {
     }
 }
 
-export const initializeBoard = () => {
+export const generateBoard = (board) => {
     let squares = [];
     let squareNumber = 1;
-    for (let data of initialBoard) {
-        const firstChar = data[0];
-        if (isNumber(firstChar)) {
-            if (data.length > 1) {
-                const piece = data[1];
-                for (let i = 0; i < +firstChar; i++) {
-                    squares.push({
-                        id: squareNumber++,
-                        piece: getPiece(piece, squareNumber < 32 ? 'b' : 'w'),
-                    })
-                }
-            }
-            else {
-                for (let i = 0; i < +firstChar; i++) {
-                    squares.push({
-                        id: squareNumber++,
-                        piece: null,
-                    })
-                }
-            }
-        }
-        else {
+    for (let data of board) {
+        if (!data) {
             squares.push({
                 id: squareNumber++,
-                piece: getPiece(data, squareNumber < 32 ? 'b' : 'w'),
+                piece: null,
+            })
+        } else {
+            const color = data[0];
+            const piece = data[1];
+            squares.push({
+                piece: getPiece(piece, color),
+                id: squareNumber++,
             })
         }
     }

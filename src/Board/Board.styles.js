@@ -28,11 +28,13 @@ export const StyledSquare = styled.div`
             return `
                 background-color: rgb(244, 57, 0, 0.7);
                 border: 3px solid rgb(244, 57, 0);
+                cursor: pointer;
             `;
         } else if (props.available) {
             return `
                 background-color: rgb(27, 145, 11, 0.7);
                 border: 3px solid rgb(27, 145, 11);
+                cursor: pointer;
             `;
         } else if (props.white) {
             return  `
