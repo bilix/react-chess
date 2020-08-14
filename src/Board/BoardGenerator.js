@@ -19,7 +19,7 @@ export const initialBoard = [
 export const verticalBorder = [8,7,6,5,4,3,2,1];
 export const horizontalBorder = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ''];
 
-const getPiece = (piece, color) => {
+export const getPiece = (piece, color) => {
     switch (piece) {
         case 'p':
             return new Pawn({color});

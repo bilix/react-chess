@@ -1,16 +1,20 @@
 import {createSlice} from '@reduxjs/toolkit';
 import { initialBoard } from '../../../Board/BoardGenerator';
 
+const initialState = {
+    board: initialBoard,
+    selectedPiece: {
+        square: 0,
+        piece: '',
+    },
+    availableMoves: [],
+    player1KilledPieces: [],
+    player2KilledPieces: [],
+};
+
 const {reducer, actions} = createSlice({
     name: 'board',
-    initialState: {
-        board: initialBoard,
-        selectedPiece: {
-            square: 0,
-            piece: '',
-        },
-        availableMoves: [],
-    },
+    initialState,
     reducers: {
         selectSquare(state, action) {
             state.selectedPiece = action.payload;
@@ -25,6 +29,14 @@ const {reducer, actions} = createSlice({
             state.availableMoves = action.payload;
         },
         movePiece(state, action) {
+            const destinationSquare = state.board[action.payload - 1];
+            if (destinationSquare) {
+                const color = destinationSquare[0];
+                const piece = destinationSquare[1];
+                if (color === 'w') state.player1KilledPieces.push(piece);
+                else state.player2KilledPieces.push(piece);
+            }
+
             state.board[state.selectedPiece.square - 1] = '';
             state.board[action.payload - 1] = state.selectedPiece.piece;
             state.selectedPiece = {
@@ -32,7 +44,8 @@ const {reducer, actions} = createSlice({
                 piece: '',
             };
             state.availableMoves = [];
-        }
+        },
+        resetBoard: (state) => initialState,
     }
 });
 
@@ -56,7 +69,10 @@ export const player2PiecesSelector = (state) => {
     const board = state.board.board;
     return playerPieces(2, board);
 };
+export const  boardSelector = (state) => state.board;
+export const player1KilledPiecesSelector = (state) => state.board.player1KilledPieces;
+export const player2KilledPiecesSelector = (state) => state.board.player2KilledPieces;
 
-export const {selectSquare, removeSquareSelection, setMoves, movePiece} = actions;
+export const {selectSquare, removeSquareSelection, setMoves, movePiece, resetBoard} = actions;
 
 export default reducer;

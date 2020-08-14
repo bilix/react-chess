@@ -1,12 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {movePiece} from '../Board/BoardReducer';
+import {movePiece, resetBoard} from '../Board/BoardReducer';
 
 const {reducer, actions} = createSlice({
     name: 'players',
     initialState: {
         currentPlayer: 1,
-        player1KilledPieces: [],
-        player2KilledPieces: [],
     },
     reducers: {
         selectPlayer(state, action) {
@@ -14,8 +12,11 @@ const {reducer, actions} = createSlice({
         },
     },
     extraReducers: {
-        [movePiece]: (state, {payload}) => {
+        [movePiece]: (state) => {
           state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
+        },
+        [resetBoard]: (state) => {
+            state.currentPlayer = 1;
         }
       }
 });

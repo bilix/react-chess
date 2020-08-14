@@ -28,7 +28,7 @@ class Piece {
             moves.push(i);
         }
         //down-left
-        for (let i = position + 7; i > 0 && i % 8 !== 0; i += 7) {
+        for (let i = position + 7; i < 64 && i % 8 !== 0; i += 7) {
             if (isFriendly(i)) break;
             if (isEnemy(i)) {
                 moves.push(i);
@@ -37,7 +37,7 @@ class Piece {
             moves.push(i);
         }
         //down-right
-        for (let i = position + 9; i > 0 && i % 8 !== 0; i += 9) {
+        for (let i = position + 9; i < 64 && i % 8 !== 1; i += 9) {
             if (isFriendly(i)) break;
             if (isEnemy(i)) {
                 moves.push(i);

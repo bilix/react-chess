@@ -4,6 +4,7 @@ import Square from './Square';
 import { generateBoard, verticalBorder, horizontalBorder } from './BoardGenerator';
 import PieceComponent from './PieceComponent';
 import {useSelector} from 'react-redux';
+import { boardSelector } from '../Store/Reducers/Board/BoardReducer';
 
 const renderSquare = (square) => {
     const row = Math.ceil(square.id/8);
@@ -23,8 +24,8 @@ const renderSquare = (square) => {
 }
 
 const Board = () => {
-    const board = useSelector(state => state.board.board);
-    const boardList = generateBoard(board);
+    const board = useSelector(state => boardSelector(state));
+    const boardList = generateBoard(board.board);
     
     return (
         <GameBoard>

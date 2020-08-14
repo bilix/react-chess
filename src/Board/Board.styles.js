@@ -4,6 +4,9 @@ export const GameBoard = styled.div`
     display: grid;
     grid-template-columns: 20px repeat(8, 75px) 20px;
     grid-template-rows: 20px repeat(8, 75px) 20px;
+    grid-area: board;
+    justify-self: center;
+    align-self: center;
     background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, transparent 50%),
     linear-gradient(90deg, rgba(255,255,255,.13) 50%, transparent 50%),
     linear-gradient(90deg, transparent 50%, rgba(255,255,255,.17) 50%),
