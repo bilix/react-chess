@@ -30,13 +30,13 @@ class Knight extends Piece {
             this.addIfNotFriendly(leftUp, friendlyPieces, moves);
         if (rightUp > 0 && !isToTheLeft(rightUp)) 
             this.addIfNotFriendly(rightUp, friendlyPieces, moves);
-        if (downLeft < 64 && !isRightColumn(downLeft)) 
+        if (downLeft <= 64 && !isRightColumn(downLeft)) 
             this.addIfNotFriendly(downLeft, friendlyPieces, moves);
-        if (downRight < 64 && !isLeftColumn(downRight)) 
+        if (downRight <= 64 && !isLeftColumn(downRight)) 
             this.addIfNotFriendly(downRight, friendlyPieces, moves);
-        if (leftDown < 64 && !isToTheRight(leftDown)) 
+        if (leftDown <= 64 && !isToTheRight(leftDown)) 
             this.addIfNotFriendly(leftDown, friendlyPieces, moves);
-        if (rightDown < 64 && !isToTheLeft(rightDown)) 
+        if (rightDown <= 64 && !isToTheLeft(rightDown)) 
             this.addIfNotFriendly(rightDown, friendlyPieces, moves);
 
         return moves;
