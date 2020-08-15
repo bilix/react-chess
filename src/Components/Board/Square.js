@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledSquare } from './Board.styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { movePiece, boardSelector } from '../../Store/Reducers/Board/BoardReducer';
-import { getSquareColor, getAdjacentMoves } from '../../BoardGenerator';
+import { getSquareColor, getAdjacentMoves } from '../../Game/BoardGenerator';
 
 const Square = ({squareNumber, children}) => {
     const board = useSelector(state => boardSelector(state));
@@ -24,7 +24,7 @@ const Square = ({squareNumber, children}) => {
         }
     }
     return (
-        <StyledSquare adjacent={adjacentMoves} onClick={() => handleClick()} key={`square_${squareNumber}`} killable={isKillable} available={isAvailableMove} selected={isSelected} white={isWhite}>
+        <StyledSquare key={`square_${squareNumber}`} adjacent={adjacentMoves} onClick={() => handleClick()} key={`square_${squareNumber}`} killable={isKillable} available={isAvailableMove} selected={isSelected} white={isWhite}>
             {children}
         </StyledSquare>
     )

@@ -1,5 +1,6 @@
 import Piece from './Piece';
-import { upN, downN, leftN, rightN, upLeftN, upRightN, downLeftN, downRightN, isLeftColumn, isRightColumn } from '../BoardGenerator';
+import { isLeftColumn, isRightColumn } from '../Game/BoardGenerator';
+import { upN, downN, leftN, rightN, upLeftN, upRightN, downLeftN, downRightN } from '../Game/Moves';
 
 class King extends Piece {
     constructor(props) {

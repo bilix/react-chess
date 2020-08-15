@@ -4,7 +4,7 @@ import { selectSquare, setMoves } from '../../Store/Reducers/Board/BoardReducer'
 import { useSelector, useDispatch } from 'react-redux';
 import { currentPlayerSelector } from '../../Store/Reducers/Players/PlayersReducer';
 import { player1PiecesSelector, player2PiecesSelector } from '../../Store/Reducers/Board/BoardReducer';
-import { getPlayerFromColor } from '../../BoardGenerator';
+import { getPlayerFromColor } from '../../Game/BoardGenerator';
 
 const PieceComponent = ({piece, position}) =>{
     const currentPlayer = useSelector(state => currentPlayerSelector(state));

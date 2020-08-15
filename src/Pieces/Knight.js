@@ -1,5 +1,5 @@
 import Piece from './Piece';
-import { isRightColumn, isLeftColumn } from '../BoardGenerator';
+import { isRightColumn, isLeftColumn } from '../Game/BoardGenerator';
 
 class Knight extends Piece {
     constructor(props) {

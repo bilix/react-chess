@@ -1,9 +1,9 @@
-import Pawn from './Pieces/Pawn';
-import Knight from './Pieces/Knight';
-import Rook from './Pieces/Rook';
-import Queen from './Pieces/Queen';
-import King from './Pieces/King';
-import Bishop from './Pieces/Bishop';
+import Pawn from '../Pieces/Pawn';
+import Knight from '../Pieces/Knight';
+import Rook from '../Pieces/Rook';
+import Queen from '../Pieces/Queen';
+import King from '../Pieces/King';
+import Bishop from '../Pieces/Bishop';
 
 export const initialBoard = [
     'br','bh','bb','bq','bk','bb','bh','br',
@@ -91,11 +91,3 @@ export const getPlayerFromColor = (color) => color === 'w' ? 1 : 2;
 export const isRightColumn = (squareNumber) => squareNumber % 8 === 0;
 export const isLeftColumn = (squareNumber) => squareNumber % 8 === 1;
 
-export const upN = (position, n) => position - 8*n;
-export const downN = (position, n) => position + 8*n;
-export const leftN = (position, n) => position - n;
-export const rightN = (position, n) => position + n;
-export const upRightN = (position, n) => position - n*7;
-export const upLeftN = (position, n) => position - n*9;
-export const downLeftN = (position, n) => position + n*7;
-export const downRightN = (position, n) => position + n*9;
