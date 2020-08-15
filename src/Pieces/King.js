@@ -23,19 +23,19 @@ class King extends Piece {
     
         if (up > 0)
             this.addIfNotFriendly(up, friendlyPieces, moves);
-        if (down < 64)
+        if (down <= 64)
             this.addIfNotFriendly(down, friendlyPieces, moves);
-        if (!isLeftColumn(left))
+        if (!isRightColumn(left))
             this.addIfNotFriendly(left, friendlyPieces, moves);
-        if (!isRightColumn(right))
+        if (!isLeftColumn(right))
             this.addIfNotFriendly(right, friendlyPieces, moves);
-        if (upLeft > 0 && !isLeftColumn(upLeft))
+        if (upLeft > 0 && !isRightColumn(upLeft))
             this.addIfNotFriendly(upLeft, friendlyPieces, moves);
-        if (upRight > 0 && !isRightColumn(upRight))
+        if (upRight > 0 && !isLeftColumn(upRight))
             this.addIfNotFriendly(upRight, friendlyPieces, moves);
-        if (downLeft < 64 && !isLeftColumn(downLeft))
+        if (downLeft <= 64 && !isRightColumn(downLeft))
             this.addIfNotFriendly(downLeft, friendlyPieces, moves);
-        if (downRight < 64 && !isRightColumn(downRight)) 
+        if (downRight <= 64 && !isLeftColumn(downRight)) 
             this.addIfNotFriendly(downRight, friendlyPieces, moves);
     
         return moves;
