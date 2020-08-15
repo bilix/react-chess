@@ -7,7 +7,9 @@ Open [https://bilix.github.io/react-chess/](https://bilix.github.io/react-chess/
 
 ## TODO
 
-Check, Checkmate, Stalemate, castling, pawn promotion.
+Check, Checkmate, Stalemate, castling, pawn promotion. <br />
+Tests. <br />
+Improve design.
 
 ## Available Scripts
 
