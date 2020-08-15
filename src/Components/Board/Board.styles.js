@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const GameBoard = styled.div`
     display: grid;
-    grid-template-columns: 20px repeat(8, 75px) 20px;
-    grid-template-rows: 20px repeat(8, 75px) 20px;
+    grid-template-columns: 20px repeat(8, 65px) 20px;
+    grid-template-rows: 20px repeat(8, 65px) 20px;
     grid-area: board;
     justify-self: center;
     align-self: center;

@@ -24,8 +24,15 @@ const Square = ({squareNumber, children}) => {
         }
     }
     return (
-        <StyledSquare key={`square_${squareNumber}`} adjacent={adjacentMoves} onClick={() => handleClick()} key={`square_${squareNumber}`} killable={isKillable} available={isAvailableMove} selected={isSelected} white={isWhite}>
-            {children}
+        <StyledSquare 
+            key={`square_${squareNumber}`} 
+            adjacent={adjacentMoves} 
+            onClick={() => handleClick()} 
+            killable={isKillable} 
+            available={isAvailableMove} 
+            selected={isSelected} 
+            white={isWhite}>
+                {children}
         </StyledSquare>
     )
 };
