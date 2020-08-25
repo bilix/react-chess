@@ -12,7 +12,7 @@ const PlayerInfo = ({player}) => {
         <InfoContainer player={player}>
             <InfoTitle>Player {player}</InfoTitle>
             <KilledPiecesContainer>
-                {killedPieces.map((piece, index) => <PieceIcon key={`dead_piece_${player}_${index}`} piece={piece} player={player} />)}
+                {killedPieces.map((pieceId, index) => <PieceIcon key={`dead_piece_${player}_${index}`} pieceId={pieceId} player={player} />)}
             </KilledPiecesContainer>
         </InfoContainer>
     )

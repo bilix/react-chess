@@ -9,7 +9,7 @@ class King extends Piece {
         this.name = `${this.color}k`;
     }
     calculatePossibleMoves = (position, friendlyPieces) => {
-        let moves = [];
+        this.possibleMoves = [];
 
         const up = upN(position, 1);
         const down = downN(position, 1);
@@ -22,23 +22,23 @@ class King extends Piece {
 
     
         if (up > 0)
-            this.addIfNotFriendly(up, friendlyPieces, moves);
+            this.addIfNotFriendly(up, friendlyPieces);
         if (down <= 64)
-            this.addIfNotFriendly(down, friendlyPieces, moves);
+            this.addIfNotFriendly(down, friendlyPieces);
         if (!isRightColumn(left))
-            this.addIfNotFriendly(left, friendlyPieces, moves);
+            this.addIfNotFriendly(left, friendlyPieces);
         if (!isLeftColumn(right))
-            this.addIfNotFriendly(right, friendlyPieces, moves);
+            this.addIfNotFriendly(right, friendlyPieces);
         if (upLeft > 0 && !isRightColumn(upLeft))
-            this.addIfNotFriendly(upLeft, friendlyPieces, moves);
+            this.addIfNotFriendly(upLeft, friendlyPieces);
         if (upRight > 0 && !isLeftColumn(upRight))
-            this.addIfNotFriendly(upRight, friendlyPieces, moves);
+            this.addIfNotFriendly(upRight, friendlyPieces);
         if (downLeft <= 64 && !isRightColumn(downLeft))
-            this.addIfNotFriendly(downLeft, friendlyPieces, moves);
+            this.addIfNotFriendly(downLeft, friendlyPieces);
         if (downRight <= 64 && !isLeftColumn(downRight)) 
-            this.addIfNotFriendly(downRight, friendlyPieces, moves);
+            this.addIfNotFriendly(downRight, friendlyPieces);
     
-        return moves;
+        return this.possibleMoves;
     }
 }
 

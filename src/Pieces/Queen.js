@@ -8,9 +8,10 @@ class Queen extends Piece {
     }
 
     calculatePossibleMoves = (position, friendlyPieces, enemyPieces) => {
-        const verticalHorizontal = this.calculateVerticalHorizontalMoves(position, friendlyPieces, enemyPieces);
-        const diagonal = this.calculateDiagonalMoves(position, friendlyPieces, enemyPieces);
-        return verticalHorizontal.concat(diagonal);
+        this.possibleMoves = [];
+        this.calculateVerticalHorizontalMoves(position, friendlyPieces, enemyPieces);
+        this.calculateDiagonalMoves(position, friendlyPieces, enemyPieces);
+        return this.possibleMoves;
     }
 
 }

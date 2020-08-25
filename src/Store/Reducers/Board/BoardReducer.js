@@ -1,11 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { initialBoard } from '../../../Game/BoardGenerator';
+import { initialBoard, generateBoard, calculateAllPossibleMoves } from '../../../Game/BoardGenerator';
+import { getGamePiece } from '../../../Game/Pieces';
 
 const initialState = {
-    board: initialBoard,
+    board: generateBoard(initialBoard),
     selectedPiece: {
         square: 0,
-        piece: '',
+        pieceId: null,
     },
     availableMoves: [],
     player1KilledPieces: [],
@@ -22,7 +23,7 @@ const {reducer, actions} = createSlice({
         removeSquareSelection(state) {
             state.selectedPiece = {
                 square: 0,
-                piece: '',
+                pieceId: null,
             };
         },
         setMoves(state, action) {
@@ -30,22 +31,23 @@ const {reducer, actions} = createSlice({
         },
         movePiece(state, action) {
             const destinationSquare = state.board[action.payload - 1];
-            if (destinationSquare) {
-                const color = destinationSquare[0];
-                const piece = destinationSquare[1];
-                if (color === 'w') state.player1KilledPieces.push(piece);
-                else state.player2KilledPieces.push(piece);
+            if (destinationSquare.pieceId) {
+                const destinationPiece = getGamePiece(destinationSquare.pieceId);
+                const color = destinationPiece.color;
+                if (color === 'w') state.player1KilledPieces.push(destinationSquare.pieceId);
+                else state.player2KilledPieces.push(destinationSquare.pieceId);
             }
 
-            state.board[state.selectedPiece.square - 1] = '';
-            state.board[action.payload - 1] = state.selectedPiece.piece;
+            state.board[state.selectedPiece.square - 1].pieceId = null;
+            state.board[action.payload - 1].pieceId = state.selectedPiece.pieceId;
             state.selectedPiece = {
                 square: 0,
-                piece: '',
+                pieceId: null,
             };
             state.availableMoves = [];
+            calculateAllPossibleMoves(state.board, playerPieces(1, state.board), playerPieces(2, state.board));
         },
-        resetBoard: (state) => initialState,
+        resetBoard: () => initialState,
     }
 });
 
@@ -53,23 +55,18 @@ const playerPieces = (player, board) => {
     let positions = [];
     const color = player === 1 ? 'w' : 'b';
     for (let i = 0; i < board.length; i++) {
-        if (board[i]) {
-            if(board[i][0] === color) positions.push(i+1);
+        if (board[i].pieceId) {
+            const piece = getGamePiece(board[i].pieceId);
+            if(piece.color === color) positions.push({
+                position: i+1, 
+                pieceId: piece.id,
+            });
         }
     }
     return positions;
 }
 
-export const player1PiecesSelector = (state) => {
-    const board = state.board.board;
-    return playerPieces(1, board);
-};
-
-export const player2PiecesSelector = (state) => {
-    const board = state.board.board;
-    return playerPieces(2, board);
-};
-export const  boardSelector = (state) => state.board;
+export const boardSelector = (state) => state.board;
 export const player1KilledPiecesSelector = (state) => state.board.player1KilledPieces;
 export const player2KilledPiecesSelector = (state) => state.board.player2KilledPieces;
 

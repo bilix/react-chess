@@ -1,9 +1,4 @@
-import Pawn from '../Pieces/Pawn';
-import Knight from '../Pieces/Knight';
-import Rook from '../Pieces/Rook';
-import Queen from '../Pieces/Queen';
-import King from '../Pieces/King';
-import Bishop from '../Pieces/Bishop';
+import { createPiece, GamePieces, getGamePiece } from './Pieces';
 
 export const initialBoard = [
     'br','bh','bb','bq','bk','bb','bh','br',
@@ -19,44 +14,54 @@ export const initialBoard = [
 export const verticalBorder = [8,7,6,5,4,3,2,1];
 export const horizontalBorder = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ''];
 
-export const getPiece = (piece, color) => {
-    switch (piece) {
-        case 'p':
-            return new Pawn({color});
-        case 'r':
-            return new Rook({color});
-        case 'h':
-            return new Knight({color});
-        case 'q':
-            return new Queen({color});
-        case 'k':
-            return new King({color});
-        case 'b':
-            return new Bishop({color});
-        default:
-            return null;
-    }
-}
-
 export const generateBoard = (board) => {
     let squares = [];
+    let whitePieces = [];
+    let blackPieces = [];
     let squareNumber = 1;
+    let pieceId = 1;
     for (let data of board) {
         if (!data) {
             squares.push({
                 id: squareNumber++,
-                piece: null,
+                pieceId: null,
             })
         } else {
             const color = data[0];
             const piece = data[1];
+            const pieceInstance = createPiece(piece, color, pieceId++);
             squares.push({
-                piece: getPiece(piece, color),
-                id: squareNumber++,
-            })
+                pieceId: pieceInstance.id,
+                id: squareNumber,
+            });
+            if (color === 'w') {
+                whitePieces.push({
+                    position: squareNumber,
+                    pieceId: pieceInstance.id,
+                })
+            } else {
+                blackPieces.push({
+                    position: squareNumber,
+                    pieceId: pieceInstance.id,
+                })
+            }
+            squareNumber++;
+            GamePieces.push(pieceInstance);
         }
     }
+    calculateAllPossibleMoves(squares, whitePieces, blackPieces);
     return squares;
+}
+
+export const calculateAllPossibleMoves = (squares, whitePieces, blackPieces) => {
+    squares.forEach(sq => {
+        if (sq.pieceId) {
+            const piece = getGamePiece(sq.pieceId);
+            const friendlyPieces = piece.color === 'w' ? whitePieces : blackPieces;
+            const enemyPieces = piece.color === 'w' ? blackPieces : whitePieces;
+            piece.calculatePossibleMoves(sq.id, friendlyPieces, enemyPieces);
+        }
+    })
 }
 
 export const getSquareColor = (squareNumber) => {
@@ -73,7 +78,7 @@ export const getAdjacentMoves = (square, moves, board) => {
     const bottom = square + 8;
 
     const adjacentHasEnemy = (position) => {
-        return !!board[position - 1]
+        return !!board[position - 1].pieceId;
     };
     const addIfNoEnemy = (position, adjacency) => !adjacentHasEnemy(position) && adjacent.push(adjacency);
     

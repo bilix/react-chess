@@ -9,7 +9,7 @@ class Knight extends Piece {
     }
 
     calculatePossibleMoves = (position, friendlyPieces) => {
-        let moves = [];
+        this.possibleMoves = [];
         const upLeft = position - 17;
         const upRight = position - 15;
         const leftUp = position - 10;
@@ -23,23 +23,23 @@ class Knight extends Piece {
         const isToTheRight = (position) => isRightColumn(position) || position % 8 === 7; 
 
         if (upLeft > 0 && !isRightColumn(upLeft)) 
-            this.addIfNotFriendly(upLeft, friendlyPieces, moves);
+            this.addIfNotFriendly(upLeft, friendlyPieces);
         if (upRight > 0 && !isLeftColumn(upRight)) 
-            this.addIfNotFriendly(upRight, friendlyPieces, moves);
+            this.addIfNotFriendly(upRight, friendlyPieces);
         if (leftUp > 0 && !isToTheRight(leftUp)) 
-            this.addIfNotFriendly(leftUp, friendlyPieces, moves);
+            this.addIfNotFriendly(leftUp, friendlyPieces);
         if (rightUp > 0 && !isToTheLeft(rightUp)) 
-            this.addIfNotFriendly(rightUp, friendlyPieces, moves);
+            this.addIfNotFriendly(rightUp, friendlyPieces);
         if (downLeft <= 64 && !isRightColumn(downLeft)) 
-            this.addIfNotFriendly(downLeft, friendlyPieces, moves);
+            this.addIfNotFriendly(downLeft, friendlyPieces);
         if (downRight <= 64 && !isLeftColumn(downRight)) 
-            this.addIfNotFriendly(downRight, friendlyPieces, moves);
+            this.addIfNotFriendly(downRight, friendlyPieces);
         if (leftDown <= 64 && !isToTheRight(leftDown)) 
-            this.addIfNotFriendly(leftDown, friendlyPieces, moves);
+            this.addIfNotFriendly(leftDown, friendlyPieces);
         if (rightDown <= 64 && !isToTheLeft(rightDown)) 
-            this.addIfNotFriendly(rightDown, friendlyPieces, moves);
+            this.addIfNotFriendly(rightDown, friendlyPieces);
 
-        return moves;
+        return this.possibleMoves;
     }
 }
 

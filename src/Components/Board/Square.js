@@ -10,7 +10,7 @@ const Square = ({squareNumber, children}) => {
 
     const isAvailableMove = board.availableMoves.includes(squareNumber);
     if (isAvailableMove) {
-        //to fix double borders, look for better solution
+        //TODO: look for better solution to fix double borders
         var adjacentMoves = getAdjacentMoves(squareNumber, board.availableMoves, board.board);
     }
 

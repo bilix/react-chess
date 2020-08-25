@@ -8,7 +8,9 @@ class Bishop extends Piece {
     }
 
     calculatePossibleMoves = (position, friendlyPieces, enemyPieces) => {
-        return this.calculateDiagonalMoves(position, friendlyPieces, enemyPieces);
+        this.possibleMoves = [];
+        this.calculateDiagonalMoves(position, friendlyPieces, enemyPieces);
+        return this.possibleMoves;
     }
 }
 

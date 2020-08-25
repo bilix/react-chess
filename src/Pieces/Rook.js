@@ -8,7 +8,9 @@ class Rook extends Piece {
     }
 
     calculatePossibleMoves = (position, friendlyPieces, enemyPieces) => {
-        return this.calculateVerticalHorizontalMoves(position, friendlyPieces, enemyPieces);
+        this.possibleMoves = [];
+        this.calculateVerticalHorizontalMoves(position, friendlyPieces, enemyPieces);
+        return this.possibleMoves;
     }
 }
 

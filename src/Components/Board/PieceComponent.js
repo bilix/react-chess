@@ -3,19 +3,16 @@ import { StyledPiece } from './Board.styles';
 import { selectSquare, setMoves } from '../../Store/Reducers/Board/BoardReducer';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentPlayerSelector } from '../../Store/Reducers/Players/PlayersReducer';
-import { player1PiecesSelector, player2PiecesSelector } from '../../Store/Reducers/Board/BoardReducer';
 import { getPlayerFromColor } from '../../Game/BoardGenerator';
+import { getGamePiece } from '../../Game/Pieces';
 
-const PieceComponent = ({piece, position}) =>{
+const PieceComponent = ({pieceId, position}) =>{
     const currentPlayer = useSelector(state => currentPlayerSelector(state));
-    const player1Pieces = useSelector(state => player1PiecesSelector(state));
-    const player2Pieces = useSelector(state => player2PiecesSelector(state));
     const dispatch = useDispatch();
-    
-    const player = getPlayerFromColor(piece.color);
 
-    const friendlyPieces = player === 1 ? player1Pieces : player2Pieces;
-    const enemyPieces = player === 1 ? player2Pieces : player1Pieces;
+    const pieceObject = getGamePiece(pieceId);
+    
+    const player = getPlayerFromColor(pieceObject.color);
 
     const isCurrentPlayer = player === currentPlayer;
 
@@ -24,15 +21,15 @@ const PieceComponent = ({piece, position}) =>{
         if (!isCurrentPlayer) return null;
         dispatch(selectSquare({
             square: position,
-            piece: piece.name,
+            pieceId,
         }));
-        const movements = piece.calculatePossibleMoves(position, friendlyPieces, enemyPieces);
+        const movements = pieceObject.possibleMoves;
         dispatch(setMoves(movements));
     }
 
     return (
         <StyledPiece currentPlayer={isCurrentPlayer} onClick={handleClick}>
-            {piece.icon}
+            {pieceObject.icon}
         </StyledPiece>
     )
 };
